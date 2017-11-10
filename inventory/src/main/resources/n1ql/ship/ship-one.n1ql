@@ -1,0 +1,19 @@
+SELECT META(d).id AS _ID, 
+  META(d).cas AS _CAS,
+  d.ship,
+  owner,
+  agent,
+  operator,
+  charterer,
+  builtAtCountry,
+  nationalityCountry,
+  manufacturer
+FROM `$bucket` d
+LEFT OUTER JOIN `$bucket` owner ON KEYS d.ship.shipLegal.ownerId
+LEFT OUTER JOIN `$bucket` agent ON KEYS d.ship.shipLegal.agentId
+LEFT OUTER JOIN `$bucket` operator ON KEYS d.ship.shipLegal.operatorId
+LEFT OUTER JOIN `$bucket` charterer ON KEYS d.ship.shipLegal.chartererId
+LEFT OUTER JOIN `$bucket` nationalityCountry ON KEYS d.ship.shipLegal.nationalityCountryId
+LEFT OUTER JOIN `$bucket` builtAtCountry ON KEYS d.ship.shipTechnicalSpec.shipBuildInfo.builtAtCountryId
+LEFT OUTER JOIN `$bucket` manufacturer ON KEYS d.ship.shipTechnicalSpec.shipBuildInfo.manufacturerId
+WHERE META(d).id=$id

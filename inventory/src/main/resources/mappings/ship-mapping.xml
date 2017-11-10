@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <configuration>
+        <custom-converters>
+            <converter type="com.trident.apis.entitymanager.service.CountryDozerConverter">
+                <class-a>java.lang.String</class-a>
+                <class-b>com.trident.shared.immigration.dto.apis.port.CountryDto</class-b>
+            </converter>
+        </custom-converters>
+    </configuration>
+    <mapping map-null="false">
+        <class-a>com.trident.apis.entitymanager.model.ShipDtoForLimitedQuery</class-a>
+        <class-b>com.trident.apis.entitymanager.model.ShipEntity</class-b>
+        <field>
+            <a>shipIdentity</a>
+            <b>ship.shipIdentity</b>
+        </field>
+        <field>
+            <a>brandCode</a>
+            <b>ship.brandCode</b>
+        </field>
+        <field>
+            <a>shipTridentCode</a>
+            <b>ship.shipTridentCode</b>
+        </field>
+    </mapping>
+</mappings>

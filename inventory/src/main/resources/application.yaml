@@ -1,0 +1,65 @@
+---
+spring:
+  http:
+    multipart:
+      max-file-size: 40MB
+      max-request-size: 40MB
+server:
+  port: 8000
+trident:
+  security:
+    enabled: false
+    divercity-auth:
+      grant-type: client_credentials
+      scope: peopleVault xiDataVault-bulk xiDataVault-list xiDataVault-individualRead givenName isMemberOf DIVERCITY mail uid cn ocean oceanroles
+      auth-header: Basic RElWRVJDSVRZOmQyQ3hEYlZHeXA5SDY1U21hYw==
+  cache:
+    service-token-cache-expiry-mins: 59
+  server:
+    info:
+      build-number: ${BUILD_NUMBER}
+      name: apis-entity-manager
+      description: Provides CRUD operations for APIS documents and port-countries, used to send ship info to port
+      display-name: Entity Manager for APIS documents and port-countries
+  db:
+    host: localhost
+    bucket: divercity
+    password:
+  links:
+    iam-client: https://am.iam-devint.gxicloud.com
+logging:
+  level:
+      com:
+        trident: DEBUG
+      org:
+        springframework: INFO
+---
+spring:
+  profiles: staging,qa,prod
+server:
+  port: 8080
+trident:
+  db:
+    host: ${GXI_COUCHBASE_HOSTS}
+    bucket: ${APIS_BUCKET}
+    password: ${APIS_BUCKET_PASSWORD}
+  cache:
+    service-token-cache-expiry-mins: ${SERVICE_TOKEN_CACHE_EXPIRY_MINS}
+  security:
+    divercity-auth:
+      grant-type: ${SERVICE_TOKEN_GRANT_TYPE}
+      scope: ${SERVICE_TOKEN_SCOPE}
+      auth-header: ${SERVICE_TOKEN_AUTH_HEADER}
+    enabled: {SECURITY_ENABLED}
+  links:
+    iam-client: ${SVC_IAM_CLIENT}
+---
+spring:
+  profiles: dev
+  jackson:
+    serialization:
+      indent_output: true
+logging:
+  level:
+    com:
+      trident: DEBUG
