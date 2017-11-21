@@ -1,5 +1,6 @@
 package javatraining.controller;
 
+import javatraining.dto.ItemDto;
 import javatraining.model.Item;
 import javatraining.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class InventoryController {
     }
 
     @GetMapping
-    public Iterable<Item> items() {
+    public Iterable<ItemDto> items() {
         return itemService.findAll();
     }
 
