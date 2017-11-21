@@ -1,0 +1,14 @@
+version: "2"
+
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    volumes:
+      - /db_setup
+      - /opt/couchbase/var
+    environment:
+      - MYSQL_ROOT_PASSWORD=testpwd
+  inventory:
+    image: p1/inventory
