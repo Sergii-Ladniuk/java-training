@@ -7,10 +7,6 @@ import java.math.BigDecimal;
 
 @Data
 @Entity(name = "items")
-@Table(name = "items")
-@NamedEntityGraph(name="joinCategory", attributeNodes = {
-        @NamedAttributeNode("category")
-})
 public class Item {
 
     @Id
@@ -19,7 +15,6 @@ public class Item {
     private Long id;
     private BigDecimal price;
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    private Category category;
+    @Column(name = "category_id")
+    private Long category;
 }

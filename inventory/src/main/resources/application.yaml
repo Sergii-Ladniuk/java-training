@@ -5,7 +5,7 @@ spring:
       max-file-size: 40MB
       max-request-size: 40MB
   datasource:
-    url: jdbc:mysql://localhost/inventory
+    url: jdbc:mysql://localhost:3306/inventory
     username: root
     password: testpwd
     driver-class-name: com.mysql.jdbc.Driver
@@ -35,3 +35,12 @@ spring:
 logging:
   level:
     javatraining: DEBUG
+
+bd:
+  dialect: org.hibernate.dialect.MySQLDialect
+  show-sql: true
+  format-sql: true
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/websystique
+  username: root
+  password: testpwd

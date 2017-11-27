@@ -1,6 +1,7 @@
 DROP DATABASE if EXISTS inventory;
 create DATABASE inventory;
 
+USE inventory;
 DROP TABLE IF EXISTS items  ;
 create TABLE items
 (
