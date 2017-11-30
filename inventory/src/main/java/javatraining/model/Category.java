@@ -14,7 +14,10 @@ public class Category {
     @Column(name = "category_id")
     private Long id;
     private String name;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "items_categories", joinColumns = {
+            @JoinColumn(name = "category_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "item_id")
+    })
     private List<ItemShort> items;
 }

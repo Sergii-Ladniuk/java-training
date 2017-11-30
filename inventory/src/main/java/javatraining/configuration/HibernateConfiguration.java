@@ -19,7 +19,6 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableConfigurationProperties
-@PropertySource(value = "classpath:application.properties")
 public class HibernateConfiguration {
 
     @Autowired
@@ -55,13 +54,5 @@ public class HibernateConfiguration {
         properties.put("hibernate.show_sql", appHibernateConfiguration.getShowSql());
         properties.put("hibernate.format_sql", appHibernateConfiguration.getFormatSql());
         return properties;
-    }
-
-    @Bean
-    @Autowired
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager txManager = new HibernateTransactionManager();
-        txManager.setSessionFactory(sessionFactory);
-        return txManager;
     }
 }
